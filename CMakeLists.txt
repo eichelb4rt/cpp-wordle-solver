@@ -5,8 +5,9 @@ add_subdirectory(test)
 include(CTest)
 
 add_subdirectory(src/trivial)
+add_subdirectory(src/hints)
 
 add_executable(main src/main.cpp)
-target_link_libraries(main PUBLIC trivial)
+target_link_libraries(main PUBLIC trivial hints)
 
 target_compile_options(main PRIVATE -Ofast -march=native)

@@ -17,9 +17,10 @@ FetchContent_MakeAvailable(Catch2)
 # These tests can use the Catch2-provided main
 set(SOURCE_FILES
   test_add.cpp
+  test_hints.cpp
 )
 add_executable(tests ${SOURCE_FILES})
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain PRIVATE trivial)
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain PRIVATE trivial hints)
 
 
 # enable automatic test registration
