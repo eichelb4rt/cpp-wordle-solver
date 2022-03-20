@@ -1,6 +1,8 @@
 #ifndef HINTS_H_
 #define HINTS_H_
 
+#include <set>
+#include <map>
 #include <string>
 #include <vector>
 
@@ -12,6 +14,7 @@ class Hint {
 public:
     std::vector<Color> colors;
     std::string word;
+    std::set<char> gray_chars;
 
     Hint(const std::string _word, const std::vector<Color> _colors);
 };
