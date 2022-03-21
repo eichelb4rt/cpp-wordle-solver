@@ -1,5 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
-#include "hints.h"
+#include "hint.h"
 
 using namespace std;
 
@@ -15,14 +15,14 @@ TEST_CASE("all green is only compatible with exact copy", "[hints]") {
     const Hint hint(hint_word, hint_colors);
 
     // compatible with exact copy
-    REQUIRE(is_compatible_with_hint("PENIS", hint));
+    REQUIRE(isCompatible("PENIS", hint));
 
     // incompatible with slightly different word
-    REQUIRE_FALSE(is_compatible_with_hint("PEBIS", hint));
+    REQUIRE_FALSE(isCompatible("PEBIS", hint));
     // incompatible with permutation
-    REQUIRE_FALSE(is_compatible_with_hint("ENISP", hint));
+    REQUIRE_FALSE(isCompatible("ENISP", hint));
     // incompatible with completely different word
-    REQUIRE_FALSE(is_compatible_with_hint("DICKS", hint));
+    REQUIRE_FALSE(isCompatible("DICKS", hint));
 }
 
 TEST_CASE("yellow chars have to appear in a different spot", "[hints]") {
@@ -37,12 +37,12 @@ TEST_CASE("yellow chars have to appear in a different spot", "[hints]") {
     const Hint hint(hint_word, hint_colors);
 
     // compatible if somewhere else
-    REQUIRE(is_compatible_with_hint("OOXOO", hint));
+    REQUIRE(isCompatible("OOXOO", hint));
     
     // can't be on the same spot
-    REQUIRE_FALSE(is_compatible_with_hint("XOOOO", hint));
+    REQUIRE_FALSE(isCompatible("XOOOO", hint));
     // is not contained
-    REQUIRE_FALSE(is_compatible_with_hint("OOOOO", hint));
+    REQUIRE_FALSE(isCompatible("OOOOO", hint));
 }
 
 TEST_CASE("a char can be green and yellow", "[hints]") {
@@ -57,12 +57,12 @@ TEST_CASE("a char can be green and yellow", "[hints]") {
     const Hint hint(hint_word, hint_colors);
 
     // compatible if somewhere else
-    REQUIRE(is_compatible_with_hint("XOOOX", hint));
+    REQUIRE(isCompatible("XOOOX", hint));
 
     // incompatible if on the same spot
-    REQUIRE_FALSE(is_compatible_with_hint("XXOOO", hint));
+    REQUIRE_FALSE(isCompatible("XXOOO", hint));
     // incompatible if not contained
-    REQUIRE_FALSE(is_compatible_with_hint("XOOOO", hint));
+    REQUIRE_FALSE(isCompatible("XOOOO", hint));
 }
 
 TEST_CASE("a char can be green and gray", "[hints]") {
@@ -77,14 +77,14 @@ TEST_CASE("a char can be green and gray", "[hints]") {
     const Hint hint(hint_word, hint_colors);
 
     // compatible if not contained (other than on the green position)
-    REQUIRE(is_compatible_with_hint("XOOOO", hint));
+    REQUIRE(isCompatible("XOOOO", hint));
 
     // incompatible if contained (other than on the green position)
-    REQUIRE_FALSE(is_compatible_with_hint("XOOOX", hint));
+    REQUIRE_FALSE(isCompatible("XOOOX", hint));
     // incompatible if not on green position
-    REQUIRE_FALSE(is_compatible_with_hint("OOXXO", hint));
+    REQUIRE_FALSE(isCompatible("OOXXO", hint));
     // incompatible if both missing
-    REQUIRE_FALSE(is_compatible_with_hint("OOOOO", hint));
+    REQUIRE_FALSE(isCompatible("OOOOO", hint));
 }
 
 TEST_CASE("gray letters cannot be contained", "[hints]") {
@@ -99,12 +99,12 @@ TEST_CASE("gray letters cannot be contained", "[hints]") {
     const Hint hint(hint_word, hint_colors);
 
     // compatible if not contained
-    REQUIRE(is_compatible_with_hint("OOOOO", hint));
+    REQUIRE(isCompatible("OOOOO", hint));
 
     // incompatible if occuring on same spot
-    REQUIRE_FALSE(is_compatible_with_hint("XOOOO", hint));
+    REQUIRE_FALSE(isCompatible("XOOOO", hint));
     // incompatile on different spots
-    REQUIRE_FALSE(is_compatible_with_hint("OXOOO", hint));
+    REQUIRE_FALSE(isCompatible("OXOOO", hint));
 }
 
 
@@ -120,12 +120,12 @@ TEST_CASE("words with different length are incompatible", "[hints]") {
     const Hint hint(hint_word, hint_colors);
 
     // matching legth
-    REQUIRE(is_compatible_with_hint("PENIS", hint));
+    REQUIRE(isCompatible("PENIS", hint));
 
     // shorter test word 
-    REQUIRE_FALSE(is_compatible_with_hint("PEN", hint));
+    REQUIRE_FALSE(isCompatible("PEN", hint));
     // longer test word
-    REQUIRE_FALSE(is_compatible_with_hint("PEEEENIS", hint));    
+    REQUIRE_FALSE(isCompatible("PEEEENIS", hint));    
 }
 
 TEST_CASE("faulty hints cannot be constructed", "[hints]") {

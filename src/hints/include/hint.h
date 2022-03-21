@@ -19,8 +19,6 @@ public:
     Hint(const std::string _word, const std::vector<Color> _colors);
 };
 
-bool is_compatible_with_hint(const std::string input, const Hint hint);
-
-bool is_compatible_with_hints(const std::string input, const std::vector<Hint> hints);
+bool isCompatible(const std::string input, const Hint hint);
 
 #endif // HINTS_H_

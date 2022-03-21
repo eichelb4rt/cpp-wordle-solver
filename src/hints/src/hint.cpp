@@ -1,25 +1,38 @@
-#include "hints.h"
+#include "hint.h"
 #include <stdexcept>
 
 using namespace std;
 
 Hint::Hint(const std::string _word, const std::vector<Color> _colors) : gray_chars() {
+    // check for valid arguments
     if (_word.length() != _colors.size()) {
         throw invalid_argument("Word must be same length as color vector.");
     }
     if (_word.length() != WORD_LENGTH) {
         throw invalid_argument("Words must be " + to_string(WORD_LENGTH) + " characters long.");
     }
+
+    // init attributes
     word = _word;
     colors = _colors;
+
+    // fill gray chars map with all the gray chars in the word
     for (int i = 0; i < WORD_LENGTH; ++i) {
         if (colors[i] == GRAY) {
-            gray_chars.insert(word[i]);
+            gray_chars.insert(_word[i]);
         }
     }
 }
 
-bool is_compatible_with_hint(const std::string input, const Hint hint) {
+/**
+ * @brief checks if an input word is compatible with a hint.
+ *
+ * @param input WORD_LENGTH-long word that is checked for compatibility with hint.
+ * @param hint WORD_LENGTH-long hint defining rules for the word.
+ * @return true if input follows rules defined by hint.
+ * @return false if not.
+ */
+bool isCompatible(const std::string input, const Hint hint) {
     // input words must have defined word length
     if (input.length() != WORD_LENGTH) {
         return false;
@@ -62,8 +75,4 @@ bool is_compatible_with_hint(const std::string input, const Hint hint) {
     }
     // input word is compatible
     return true;
-}
-
-bool is_compatible_with_hints(const std::string input, const std::vector<Hint> hints) {
-    return false;
 }
